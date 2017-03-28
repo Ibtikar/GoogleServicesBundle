@@ -13,7 +13,7 @@
     "require": {
         "php": ">=5.5.9",
         "sngrl/php-firebase-cloud-messaging": "dev-master",
-        "Ibtikar/ShareEconomyToolsBundle": "1.0",
+        "Ibtikar/ShareEconomyToolsBundle": "~1.0@dev",
         "composer/installers": "~1.0",
         "doctrine/doctrine-migrations-bundle": "^1.1"
     },
