@@ -45,7 +45,7 @@ class DeviceController extends Controller
         /* @var $APIOperations \Ibtikar\ShareEconomyToolsBundle\Service\APIOperations */
         $APIOperations = $this->get('api_operations');
         $registerDevice = new DeviceResponses\Register();
-        $validationErrorsResponse = $APIOperations->bindAndValidateObjectDataFromRequest($registerDevice, $request);
+        $validationErrorsResponse = $APIOperations->bindAndValidateObjectDataFromRequst($registerDevice, $request);
         if ($validationErrorsResponse) {
             return $validationErrorsResponse;
         }
@@ -105,7 +105,7 @@ class DeviceController extends Controller
         /* @var $APIOperations \Ibtikar\ShareEconomyToolsBundle\Service\APIOperations */
         $APIOperations = $this->get('api_operations');
         $setIOSBadge = new DeviceResponses\SetIOSBadge();
-        $validationErrorsResponse = $APIOperations->bindAndValidateObjectDataFromRequest($setIOSBadge, $request);
+        $validationErrorsResponse = $APIOperations->bindAndValidateObjectDataFromRequst($setIOSBadge, $request);
         if ($validationErrorsResponse) {
             return $validationErrorsResponse;
         }
@@ -153,7 +153,7 @@ class DeviceController extends Controller
         /* @var $APIOperations \Ibtikar\ShareEconomyToolsBundle\Service\APIOperations */
         $APIOperations = $this->get('api_operations');
         $deviceInput = new DeviceResponses\Device();
-        $validationErrorsResponse = $APIOperations->bindAndValidateObjectDataFromRequest($deviceInput, $request);
+        $validationErrorsResponse = $APIOperations->bindAndValidateObjectDataFromRequst($deviceInput, $request);
         if ($validationErrorsResponse) {
             return $validationErrorsResponse;
         }
