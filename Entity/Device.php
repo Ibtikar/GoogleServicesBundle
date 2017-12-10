@@ -58,6 +58,16 @@ class Device
      */
     private $badgeNumber;
 
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="locale", type="string", length=2, nullable=true)
+     */
+    protected $locale;
+
+
     /**
      * Get id
      *
@@ -186,5 +196,29 @@ class Device
     public function getBadgeNumber()
     {
         return $this->badgeNumber;
+    }
+
+    /**
+     * Set locale
+     *
+     * @param string $locale
+     *
+     * @return User
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
+
+    /**
+     * Get locale
+     *
+     * @return string
+     */
+    public function getLocale()
+    {
+        return $this->locale;
     }
 }
