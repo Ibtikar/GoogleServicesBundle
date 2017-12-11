@@ -15,6 +15,11 @@ class Device
      * @Assert\Length(max=190)
      * @Assert\NotBlank
      */
-    public $identifier;
+    public $deviceIdentifier;
+
+    /**
+     * @Assert\Type("scalar")
+     */
+    public $fcmToken;
 
 }

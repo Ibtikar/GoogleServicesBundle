@@ -2,6 +2,8 @@
 
 namespace Ibtikar\GoogleServicesBundle\Controller\API;
 
+use AppBundle\APIResponse\ErrorsResponse;
+use AppBundle\Service\UserOperations;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -124,11 +126,7 @@ class DeviceController extends Controller
      * Remove the device relation with the current registered user
      *
      * @ApiDoc(
-     *  section="Device",
-     *  tags={
-     *     "stable"="green"
-     *  },
-     *  input="Ibtikar\GoogleServicesBundle\APIResponse\Device\Device",
+     *  section="Devices",
      *  statusCodes={
      *      200="Returned on success",
      *      403="Returned if the api key is not valid",
@@ -145,26 +143,46 @@ class DeviceController extends Controller
      *  }
      * )
      * @author Mahmoud Mostafa <mahmoud.mostafa@ibtikar.net.sa>
+     * edited by Khaled
      * @param Request $request
      * @return JsonResponse
      */
-    public function removeDeviceUserAction(Request $request)
+    public function removeUserDeviceAction(Request $request)
     {
+        $user = $this->getUser();
+
         /* @var $APIOperations \Ibtikar\ShareEconomyToolsBundle\Service\APIOperations */
         $APIOperations = $this->get('api_operations');
         $deviceInput = new DeviceResponses\Device();
-        $validationErrorsResponse = $APIOperations->bindAndValidateObjectDataFromRequest($deviceInput, $request);
-        if ($validationErrorsResponse) {
-            return $validationErrorsResponse;
+        $APIOperations->bindObjectDataFromJsonRequest($deviceInput, $request);
+        /* @var $userOperations UserOperations */
+        $userOperations = $this->get('user_operations');
+        $validationMessages = $userOperations->validateObject($deviceInput);
+
+        if ($user->getId() != $request->get('userID')) {
+            $validationMessages[] = new ErrorsResponse('userID', $this->get('translator')->trans('unauthorized_action'));
         }
+
         $em = $this->getDoctrine()->getManager();
-        /* @var $device \Ibtikar\GoogleServicesBundle\Entity\Device */
-        $device = $em->getRepository('IbtikarGoogleServicesBundle:Device')->findOneByIdentifier($deviceInput->identifier);
-        if (!$device) {
-            return $APIOperations->getNotFoundErrorJsonResponse();
+
+        if($deviceInput->fcmToken) {
+            /* @var $device \Ibtikar\GoogleServicesBundle\Entity\Device */
+            $device = $em->getRepository('IbtikarGoogleServicesBundle:Device')->findOneBy(['identifier' => $deviceInput->deviceIdentifier,'token' => $deviceInput->fcmToken]);
+        } else {
+            $device = $em->getRepository('IbtikarGoogleServicesBundle:Device')->findOneByIdentifier($deviceInput->deviceIdentifier);
         }
-        $device->setUser(null);
+
+        if (!$device) {
+            $validationMessages[] = new ErrorsResponse('deviceIdentifier', $this->get('translator')->trans('Device not found'));
+        }
+
+        if (count($validationMessages)) {
+            return $APIOperations->getErrorsJsonResponse($validationMessages);
+        }
+
+        $em->remove($device);
         $em->flush();
-        return $APIOperations->getSuccessJsonResponse();
+
+        return $APIOperations->getSuccessJsonResponse($device);
     }
 }
