@@ -125,6 +125,8 @@ class FirebaseCloudMessaging
         }
         if(isset($data['sound'])){
             $notification->setSound($data['sound']);
+        }else{
+            $notification->setSound('default');
         }
         $message->setNotification($notification);
         try {
