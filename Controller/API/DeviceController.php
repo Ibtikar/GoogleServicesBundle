@@ -17,27 +17,6 @@ class DeviceController extends Controller
     /**
      * Register new device
      *
-     * @ApiDoc(
-     *  section="Device",
-     *  tags={
-     *     "stable"="green"
-     *  },
-     *  input="Ibtikar\GoogleServicesBundle\APIResponse\Device\Register",
-     *  statusCodes={
-     *      200="Returned on success",
-     *      403="Returned if the api key is not valid",
-     *      404="Returned if the page was not found",
-     *      422="Returned if there is a validation error",
-     *      500="Returned if there is an internal server error"
-     *  },
-     *  responseMap = {
-     *      200="Ibtikar\ShareEconomyToolsBundle\APIResponse\Success",
-     *      403="Ibtikar\ShareEconomyToolsBundle\APIResponse\InvalidAPIKey",
-     *      404="Ibtikar\ShareEconomyToolsBundle\APIResponse\NotFound",
-     *      422="Ibtikar\ShareEconomyToolsBundle\APIResponse\ValidationErrors",
-     *      500="Ibtikar\ShareEconomyToolsBundle\APIResponse\InternalServerError"
-     *  }
-     * )
      * @author Mahmoud Mostafa <mahmoud.mostafa@ibtikar.net.sa>
      * @param Request $request
      * @return JsonResponse
@@ -77,27 +56,6 @@ class DeviceController extends Controller
     /**
      * Set the ios device notification count
      *
-     * @ApiDoc(
-     *  section="Device",
-     *  tags={
-     *     "stable"="green"
-     *  },
-     *  input="Ibtikar\GoogleServicesBundle\APIResponse\Device\SetIOSBadge",
-     *  statusCodes={
-     *      200="Returned on success",
-     *      403="Returned if the api key is not valid",
-     *      404="Returned if the page was not found",
-     *      422="Returned if there is a validation error",
-     *      500="Returned if there is an internal server error"
-     *  },
-     *  responseMap = {
-     *      200="Ibtikar\ShareEconomyToolsBundle\APIResponse\Success",
-     *      403="Ibtikar\ShareEconomyToolsBundle\APIResponse\InvalidAPIKey",
-     *      404="Ibtikar\ShareEconomyToolsBundle\APIResponse\NotFound",
-     *      422="Ibtikar\ShareEconomyToolsBundle\APIResponse\ValidationErrors",
-     *      500="Ibtikar\ShareEconomyToolsBundle\APIResponse\InternalServerError"
-     *  }
-     * )
      * @author Mahmoud Mostafa <mahmoud.mostafa@ibtikar.net.sa>
      * @param Request $request
      * @return JsonResponse
@@ -125,23 +83,6 @@ class DeviceController extends Controller
     /**
      * Remove the device relation with the current registered user
      *
-     * @ApiDoc(
-     *  section="Devices",
-     *  statusCodes={
-     *      200="Returned on success",
-     *      403="Returned if the api key is not valid",
-     *      404="Returned if device was not found",
-     *      422="Returned if there is a validation error",
-     *      500="Returned if there is an internal server error"
-     *  },
-     *  responseMap = {
-     *      200="Ibtikar\ShareEconomyToolsBundle\APIResponse\Success",
-     *      403="Ibtikar\ShareEconomyToolsBundle\APIResponse\InvalidAPIKey",
-     *      404="Ibtikar\ShareEconomyToolsBundle\APIResponse\NotFound",
-     *      422="Ibtikar\ShareEconomyToolsBundle\APIResponse\ValidationErrors",
-     *      500="Ibtikar\ShareEconomyToolsBundle\APIResponse\InternalServerError"
-     *  }
-     * )
      * @author Mahmoud Mostafa <mahmoud.mostafa@ibtikar.net.sa>
      * edited by Khaled
      * @param Request $request

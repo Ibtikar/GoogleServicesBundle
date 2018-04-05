@@ -15,7 +15,7 @@ class Device
      * @Assert\Length(max=190)
      * @Assert\NotBlank
      */
-    public $deviceIdentifier;
+    public $identifier;
 
     /**
      * @Assert\Type("scalar")
